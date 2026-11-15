@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f3f5fb;
+  --surface: #ffffff;
+  --ink: #141b3a;
+  --mute: #566087;
+  --line: #dce1f0;
+  --brand: #2b43d1;
+  --brand-ink: #1b2c9c;
+  --marigold: #f5b31a;
+  --ok: #0b7a62;
+  --warn: #9a5b00;
+  --viol: #5b4bc9;
+  --bad: #b23a28;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Public Sans Variable", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Bricolage Grotesque Variable", system-ui, sans-serif;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--brand-ink);
+}
+.btn-ghost {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  border-color: var(--brand);
+}
+.btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.field {
+  width: 100%;
+  min-height: 44px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 0 0.85rem;
+  background: #fff;
+}
+
+/* KPI mosaic cells. Each state differs in shape and glyph as well as colour. */
+.cell {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  border: 2px solid transparent;
+  flex: none;
+}
+button.cell {
+  cursor: pointer;
+}
+.cell-verified {
+  background: var(--ok);
+  color: #fff;
+}
+.cell-check {
+  background: #fff;
+  border-color: var(--viol);
+  color: var(--viol);
+}
+.cell-partial {
+  background: linear-gradient(180deg, var(--warn) 0 50%, #fff 50% 100%);
+  border-color: var(--warn);
+  color: #fff;
+}
+.cell-missing {
+  background: #fff;
+  border: 2px dashed var(--bad);
+  color: var(--bad);
+}
+.cell-na {
+  background: var(--line);
+  color: var(--mute);
+}
+.cell-pending {
+  background: var(--line);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.cell-new {
+  animation: pop 0.35s ease-out;
+}
+@keyframes flash {
+  0%,
+  60% {
+    box-shadow: 0 0 0 3px var(--marigold);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+.flash {
+  animation: flash 2s ease-out;
+}
+
+details > summary {
+  cursor: pointer;
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+dialog::backdrop {
+  background: rgba(20, 27, 58, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .panel[hidden] {
+    display: block !important;
+  }
+  details > :not(summary) {
+    display: block;
+  }
+  .print-break {
+    break-inside: avoid;
+  }
+}
